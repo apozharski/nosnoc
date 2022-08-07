@@ -22,10 +22,11 @@ nabla_J_fun = model.nabla_J_fun;
 s_elastic_iter = 1;
 
 sigma_k = sigma_0;
+sigma_uk = sigma_0;
 x0 = model.x0;
 
 try
-    complementarity_stats = [full(comp_res(w0))];
+    complementarity_stats = [full(comp_res(0))];
 catch
     w0 = w0(1:length(model.w));
     complementarity_stats = [full(comp_res(w0))];
@@ -51,10 +52,13 @@ while (complementarity_iter+vf_resiudal) > comp_tol && ii < N_homotopy
     % homotopy parameter update
     if ii == 0
         sigma_k = sigma_0;
+        sigma_uk = sigma_0;
     else
         sigma_k = kappa*sigma_k;
+        sigma_uk = kappa*sigma_uk;
     end
     p_val(1) = sigma_k;
+    p_val(model.n_p) = sigma_uk;
     if h_fixed_to_free_homotopy
         p_val(3) = 1+(sigma_k*1e4);
     end
@@ -84,7 +88,6 @@ while (complementarity_iter+vf_resiudal) > comp_tol && ii < N_homotopy
         results = solver('x0', w0, 'lbx', lbw, 'ubx', ubw,'lbg', lbg, 'ubg', ubg,'p',p_val);
         cpu_time_iter = toc ;
     end
-
     cpu_time = [cpu_time,cpu_time_iter];
     w_opt = full(results.x);
     w0 = w_opt;

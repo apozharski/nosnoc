@@ -367,14 +367,14 @@ p = [sigma];
 n_p = length(p);
 %% Parameters extended
 % update values of parameters vector (as defualt settings might be overwritten)
-p_val = [sigma_0,rho_sot,rho_h,rho_terminal,T];
+p_val = [sigma_0,rho_sot,rho_h,rho_terminal,T,sigma_0];
 % define parameters;
 sigma_p = define_casadi_symbolic(casadi_symbolic_mode,'sigma_p'); % homotopy parameter
 rho_sot_p = define_casadi_symbolic(casadi_symbolic_mode,'rho_sot_p'); % homotopy parameter
 rho_h_p = define_casadi_symbolic(casadi_symbolic_mode,'rho_h_p'); % homotopy parameter
 rho_terminal_p = define_casadi_symbolic(casadi_symbolic_mode,'rho_terminal_p'); % homotopy parameter
 T_ctrl_p  = define_casadi_symbolic(casadi_symbolic_mode,'T_ctrl_p'); % homotopy parameter
-p = [sigma_p,rho_sot_p,rho_h_p,rho_terminal_p,T_ctrl_p];
+p = [sigma_p,rho_sot_p,rho_h_p,rho_terminal_p,T_ctrl_p,sigma_u];
 n_p = length(p);
 
 %% Algebraic variables defintion
