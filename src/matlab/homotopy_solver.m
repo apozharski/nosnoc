@@ -22,7 +22,7 @@ nabla_J_fun = model.nabla_J_fun;
 s_elastic_iter = 1;
 
 sigma_k = sigma_0;
-sigma_uk = sigma_0;
+sigma_uk = sigma_0*1e2;
 x0 = model.x0;
 
 try
@@ -52,7 +52,7 @@ while (complementarity_iter+vf_resiudal) > comp_tol && ii < N_homotopy
     % homotopy parameter update
     if ii == 0
         sigma_k = sigma_0;
-        sigma_uk = sigma_0;
+        sigma_uk = sigma_0*1e2;
     else
         sigma_k = kappa*sigma_k;
         sigma_uk = kappa*sigma_uk;
